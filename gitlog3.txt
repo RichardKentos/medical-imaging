@@ -1,0 +1,74 @@
+commit 10dea9a1957592408c0c29658b30789c2ceb78a9
+Merge: 1d42993 4a21b08
+Author: Marija Trpenovska <mtrpenovska@gmail.com>
+Date:   Tue Mar 28 12:46:43 2023 +0200
+
+    Merge branch 'main' of https://github.com/RichardKentos/medical-imaging
+
+commit 4a21b087f7ef2ca6adc696fcbd7902fa15dd0428
+Author: esma <esma@itu.dk>
+Date:   Tue Mar 28 12:45:32 2023 +0200
+
+    addded esther.py file
+
+commit 1d4299356b4059b75aa794b81e2f7d7289e66cfc
+Merge: f71255d cdac5cd
+Author: Marija Trpenovska <mtrpenovska@gmail.com>
+Date:   Tue Mar 28 12:43:39 2023 +0200
+
+    Merge branch 'main' of https://github.com/RichardKentos/medical-imaging
+
+commit f71255d73a21690736ea8d424f88fb44f0138cd0
+Author: Marija Trpenovska <mtrpenovska@gmail.com>
+Date:   Tue Mar 28 12:43:33 2023 +0200
+
+    Example
+
+commit 09a6d841842003d600a790aaaed41d76728c7de4
+Merge: 24dac7e cdac5cd
+Author: Hana Dubovska <hanka.dubovska@gmail.com>
+Date:   Tue Mar 28 12:43:19 2023 +0200
+
+    Merge branch 'main' of https://github.com/RichardKentos/medical-imaging
+
+commit cdac5cd3e998c77b8e82885820a31b9e2249b12a
+Author: esma <esma@itu.dk>
+Date:   Tue Mar 28 12:42:56 2023 +0200
+
+    updated .gitignore
+
+commit 24dac7e42e2e5b4843f10976697d0ea2f598e948
+Author: Hana Dubovska <hanka.dubovska@gmail.com>
+Date:   Tue Mar 28 12:42:52 2023 +0200
+
+    I added new file
+
+commit c9446d6946fdb849957710d1f689b6d0d73b83a4
+Author: Esther D. B. Madsen <79317119+EDBM@users.noreply.github.com>
+Date:   Tue Mar 28 12:39:40 2023 +0200
+
+    Delete .idea directory
+
+commit 4508fe03c33fff0d1845570fdc651934a49d9eaa
+Author: Esther D. B. Madsen <79317119+EDBM@users.noreply.github.com>
+Date:   Tue Mar 28 12:39:16 2023 +0200
+
+    Update .gitignore
+
+commit bc180c8fb0d10cf86bff2e99d0f43575c8174ea2
+Author: richard.kentos <richard.kentos@the-software.sk>
+Date:   Tue Mar 28 12:36:59 2023 +0200
+
+    added gitignore
+
+commit b3a7e5ac6514a1cddccf2dccfd18f8fcdb6dda78
+Author: richard.kentos <richard.kentos@the-software.sk>
+Date:   Tue Mar 28 12:25:22 2023 +0200
+
+    added richard
+
+commit f891dce6e06e978c43e305fe2981f24e64848bfe
+Author: esma <esma@itu.dk>
+Date:   Tue Mar 28 12:21:45 2023 +0200
+
+    i did stuff
