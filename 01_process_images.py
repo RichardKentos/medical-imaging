@@ -74,6 +74,7 @@ features = np.empty([num_images, num_features], dtype=np.float16)
 for i in np.arange(num_images):
 
     # Define filenames related to this image
+    #TODO make this work for Mac with the "/"
     file_image = path_image / image_id[i]
 
     if exists(file_image):
