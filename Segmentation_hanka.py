@@ -6,9 +6,10 @@ from skimage.color import rgb2gray
 import skimage.morphology as morphology
 from skimage import measure
 from scipy import ndimage
+from pathlib import Path
 
 # Prepare an image
-file_im = 'data\images\imgs_part_1\PAT_8_15_820.png'
+file_im = Path('data\images\imgs_part_1\PAT_8_15_820.png')
 im = plt.imread(file_im)
 im2 = im[0:1500, :, :3]  # Select only the first three channels (RGB)
 im2 = rgb2gray(im2)*256

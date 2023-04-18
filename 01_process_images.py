@@ -7,6 +7,7 @@ from os.path import exists
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # Import packages for image processing
 from skimage import morphology  # for measuring things in the masks
@@ -44,8 +45,9 @@ def get_pixel_rgb(image):
 
 
 # Where is the raw data
-file_data = '..' + os.sep + 'data' + os.sep + 'metadata.csv'
-path_image = '..' + os.sep + 'data' + os.sep + 'images' + os.sep + 'imgs_part_1'
+file_data = Path("data\metadata.csv")#'..' + os.path.sep + 'data' + os.path.sep + 'metadata.csv'
+path_image = Path('data\images\imgs_part_1')#'..' + os.path.sep + 'data' + os.path.sep + 'images' + os.path.sep + 'imgs_part_1'
+
 
 # Where we will store the features
 file_features = 'features/features.csv'
