@@ -8,14 +8,14 @@ from skimage import measure
 from scipy import ndimage
 
 # Prepare an image
-file_im = r'C:\Users\Hanka\Documents\ITU\2.semester\Project 2\images\337571397_1004917544247168_2261794394681907662_n.png'
+file_im = 'data\images\imgs_part_1\PAT_8_15_820.png'
 im = plt.imread(file_im)
-im2 = im[0:1500,:,:3] # Select only the first three channels (RGB)
+im2 = im[0:1500, :, :3]  # Select only the first three channels (RGB)
 im2 = rgb2gray(im2)*256
 plt.imshow(im2, cmap='gray')
 
 # Can we use the histogram to extract the lesion?
-mask = im2 < 95 # Value selected by looking at the histogram
+mask = im2 < 95  # Value selected by looking at the histogram
 plt.imshow(mask, cmap='gray')
 
 # Remove small white regions and keep only the largest connected region
@@ -41,7 +41,7 @@ else:
     mask = np.zeros_like(im2)
 
 # Show the resulting mask next to the original image
-fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10,5))
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
 axes[0].imshow(im2, cmap='gray')
 axes[1].imshow(mask, cmap='gray')
 axes[0].set_title('Original Image')
