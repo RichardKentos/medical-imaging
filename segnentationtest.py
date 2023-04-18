@@ -1,18 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import skimage.filters as filters
 from skimage import io, measure
 from scipy.spatial.distance import cdist
 
 # Load the image
-image = io.imread('data/images/imgs_part_1/PAT_8_15_820.png')
-
-# Threshold the image to segment the lesion
-thresh = filters.threshold_otsu(image)
-mask = image > thresh
+image = io.imread('data/images/guide_images/PAT_89_135_11.png')
 
 # Label the connected regions in the mask
-labels = measure.label(mask)
+labels = measure.label(image)
 
 # Find the largest connected region, which is assumed to be the lesion
 props = measure.regionprops(labels)
@@ -40,7 +35,10 @@ left_mean_distance = np.mean(left_distances)
 right_mean_distance = np.mean(right_distances)
 
 # Compute the ratio of the mean distances between the left and right halves
-symmetry_ratio = left_mean_distance / right_mean_distance
+if left_mean_distance <= right_mean_distance:
+    symmetry_ratio = left_mean_distance / right_mean_distance
+else:
+    symmetry_ratio = right_mean_distance / left_mean_distance
 
 # If the ratio is close to 1, the lesion is symmetric
 if 0.9 <= symmetry_ratio <= 1.1:
