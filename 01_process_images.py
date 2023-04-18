@@ -45,12 +45,12 @@ def get_pixel_rgb(image):
 
 
 # Where is the raw data
-file_data = Path("data\metadata.csv")#'..' + os.path.sep + 'data' + os.path.sep + 'metadata.csv'
-path_image = Path('data\images\imgs_part_1')#'..' + os.path.sep + 'data' + os.path.sep + 'images' + os.path.sep + 'imgs_part_1'
+file_data = Path("data\metadata.csv") #'..' + os.path.sep + 'data' + os.path.sep + 'metadata.csv'
+path_image = Path('data\images\imgs_part_1') #'..' + os.path.sep + 'data' + os.path.sep + 'images' + os.path.sep + 'imgs_part_1'
 
 
 # Where we will store the features
-file_features = 'features/features.csv'
+file_features = Path('features/features.csv')
 
 # Read meta-data into a Pandas dataframe
 df = pd.read_csv(file_data)
@@ -74,7 +74,7 @@ features = np.empty([num_images, num_features], dtype=np.float16)
 for i in np.arange(num_images):
 
     # Define filenames related to this image
-    file_image = path_image + os.sep + image_id[i]
+    file_image = path_image / image_id[i]
 
     if exists(file_image):
         # Read the image
