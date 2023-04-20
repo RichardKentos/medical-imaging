@@ -5,7 +5,8 @@ from skimage import io, measure
 from scipy.spatial.distance import cdist
 
 # Load the image
-image = io.imread('data/images/imgs_part_1/PAT_8_15_820.png')
+image = io.imread(
+    '/home/richard/Desktop/Python/second-project/medical-imaging/data/images/TestImagesPart2/ball.png')
 
 # Threshold the image to segment the lesion
 thresh = filters.threshold_otsu(image)

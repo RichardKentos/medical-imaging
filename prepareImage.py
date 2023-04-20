@@ -4,18 +4,22 @@ from scipy import ndimage
 from skimage import morphology, measure
 from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
+from skimage.transform import resize
 
 
 def prepareImage(imageName):
-    filename = Path(f'data/images/imgs_part_1/{imageName}')  # PAT_8_15_820.png
-    im = plt.imread(filename)
+    # filename = Path(f'data/images/imgs_part_1/{imageName}')  # PAT_8_15_820.png
+
+    im = plt.imread(imageName)
     im2 = im[0:1500, :, :3]  # Select only the first three channels (RGB)
     im2 = rgb2gray(im2)*256
+    im = resize(im, (im.shape[0] // 4, im.shape[1] // 4), anti_aliasing=True)
 
     return im2
 
+
 def refineImage(im2):
-    mask = im2 < 95  # Value selected by looking at the histogram
+    mask = im2 < 150  # Value selected by looking at the histogram
     plt.imshow(mask, cmap='gray')
 
     # Remove small white regions and keep only the largest connected region
