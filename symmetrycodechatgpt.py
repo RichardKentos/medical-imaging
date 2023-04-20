@@ -1,20 +1,19 @@
+import cv2
 import numpy as np
+from scipy.spatial.distance import cdist
 import matplotlib.pyplot as plt
 import skimage.filters as filters
-from skimage import io, color, measure
-from scipy.spatial.distance import cdist
+from skimage import io, measure
+from prepareImage import *
 
-# Load the image
-image = io.imread(
-    '/home/richard/Desktop/Python/second-project/medical-imaging/data/images/TestImagesPart2/ball.png')
-
-# Convert the image to grayscale
-image_rgb = color.gray2rgb(image)
-image_gray = color.rgb2gray(image_rgb)
+# Prepare an image
+filename = 'PAT_72_110_647.png'
+im2 = prepareImage(filename)
+gray = refineImage(im2)
 
 # Threshold the image to segment the lesion
-thresh = filters.threshold_otsu(image_gray)
-mask = image_gray > thresh
+thresh = filters.threshold_otsu(gray)
+mask = gray > thresh
 
 # Label the connected regions in the mask
 labels = measure.label(mask)
@@ -52,3 +51,12 @@ if 0.9 <= symmetry_ratio <= 1.1:
     print('The lesion is symmetric')
 else:
     print('The lesion is asymmetric')
+
+# Display the image and mask
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 5))
+axes[0].imshow(gray, cmap='gray')
+axes[1].imshow(mask, cmap='gray')
+axes[0].set_title('Original Image')
+axes[1].set_title('Mask')
+fig.tight_layout()
+plt.show()
