@@ -2,7 +2,6 @@ import matplotlib
 import numpy as np
 import glob
 import matplotlib.pyplot as plt
-import ipympl
 import imageio as iio
 import skimage.color
 import skimage.filters
