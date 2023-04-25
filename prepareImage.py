@@ -5,6 +5,7 @@ from skimage import morphology, measure
 from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 from skimage.transform import resize
+from testthreshold import *
 
 
 def prepareImage(imageName):
@@ -18,8 +19,11 @@ def prepareImage(imageName):
     return im2
 
 
-def refineImage(im2):
-    mask = im2 < 150  # Value selected by looking at the histogram
+def refineImage(im2, filename):
+    # Value selected by looking at the histogram
+    thresh = measure_root_mass(filename)
+
+    mask = im2 < thresh
     plt.imshow(mask, cmap='gray')
 
     # Remove small white regions and keep only the largest connected region

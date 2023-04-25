@@ -9,7 +9,6 @@ from prepareImage import *
 # Prepare an image
 filename = 'data/images/imgs_part_1/PAT_9_17_80.png'
 im2 = prepareImage(filename)
-print(im2)
 gray = refineImage(im2, filename)
 
 # Threshold the image to segment the lesion
