@@ -1,4 +1,4 @@
-import cv2
+#import cv2
 import numpy as np
 from scipy.spatial.distance import cdist
 import matplotlib.pyplot as plt
@@ -7,9 +7,9 @@ from skimage import io, measure
 from prepareImage import *
 
 # Prepare an image
-filename = 'data/images/guide_images/PAT_72_110_647.png'
+filename = 'data/images/guide_images/PAT_562_1110_360.png'
 im2 = prepareImage(filename)
-gray = refineImage(im2)
+gray = refineImage(im2, filename)
 
 # Threshold the image to segment the lesion
 thresh = filters.threshold_otsu(gray)

@@ -22,6 +22,6 @@ def measure_root_mass(filename, sigma=1.0):
     #h = binary_mask.shape[0]
     #density = rootPixels / (w * h)
 
-    return t
+    return t*255
 
 print(measure_root_mass(filename='data/images/imgs_part_1/PAT_30_41_815.png',sigma=1.5))
