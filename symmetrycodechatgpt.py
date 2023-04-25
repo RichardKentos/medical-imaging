@@ -7,9 +7,10 @@ from skimage import io, measure
 from prepareImage import *
 
 # Prepare an image
-filename = 'PAT_72_110_647.png'
+filename = 'data/images/imgs_part_1/PAT_9_17_80.png'
 im2 = prepareImage(filename)
-gray = refineImage(im2)
+print(im2)
+gray = refineImage(im2, filename)
 
 # Threshold the image to segment the lesion
 thresh = filters.threshold_otsu(gray)
@@ -47,7 +48,7 @@ right_mean_distance = np.mean(right_distances)
 symmetry_ratio = left_mean_distance / right_mean_distance
 
 # If the ratio is close to 1, the lesion is symmetric
-if 0.9 <= symmetry_ratio <= 1.1:
+if 0.98 <= symmetry_ratio <= 1.02:
     print('The lesion is symmetric')
 else:
     print('The lesion is asymmetric')
