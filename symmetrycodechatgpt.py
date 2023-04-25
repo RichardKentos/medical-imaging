@@ -7,7 +7,7 @@ from skimage import io, measure
 from prepareImage import *
 
 # Prepare an image
-filename = 'PAT_72_110_647.png'
+filename = 'data/images/guide_images/PAT_72_110_647.png'
 im2 = prepareImage(filename)
 gray = refineImage(im2)
 
