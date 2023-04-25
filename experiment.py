@@ -22,7 +22,8 @@ def mainfunction():
     # blur the image to denoise
     blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
     plt.imshow(blurred_image)
-    plt.show()
+    plt.show() #show the blurred image
+
     # show the histogram of the blurred image
     histogram, bin_edges = np.histogram(blurred_image, bins=256, range=(0.0, 1.0))
     fig, ax = plt.subplots()
@@ -34,11 +35,15 @@ def mainfunction():
 
     # perform automatic thresholding
     t = skimage.filters.threshold_otsu(blurred_image)
+    x = skimage.filters.try_all_threshold(blurred_image)
+    print(x)
+
     print("Found automatic threshold t = {}.".format(t))
 
     # create a binary mask with the threshold found by Otsu's method
     binary_mask = blurred_image < t
 
+    #reduce noise and clean the image
     binary_mask = morphology.remove_small_objects(binary_mask, min_size=1000)
     binary_mask = morphology.remove_small_holes(binary_mask, area_threshold=1000)
     mask_largest = morphology.label(binary_mask, connectivity=2)
@@ -61,7 +66,7 @@ def mainfunction():
         binary_mask = np.zeros_like(blurred_image)
 
     fig, ax = plt.subplots()
-    plt.imshow(binary_mask, cmap="gray")
+    plt.imshow(binary_mask, cmap="gray") #show the black/white segmentation
 
     # apply the binary mask to select the foreground
     selection = imgfile.copy()
@@ -69,6 +74,6 @@ def mainfunction():
 
     fig, ax = plt.subplots()
     plt.imshow(selection)
-    plt.show()
+    plt.show() #show the segmented lesion
 
 mainfunction()
