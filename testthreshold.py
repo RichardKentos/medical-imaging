@@ -24,4 +24,4 @@ def measure_root_mass(filename, sigma=1.0):
 
     return t*255
 
-print(measure_root_mass(filename='data/images/imgs_part_1/PAT_30_41_815.png',sigma=1.5))
+#print(measure_root_mass(filename='data/images/imgs_part_1/PAT_30_41_815.png',sigma=1.5))

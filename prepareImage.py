@@ -21,7 +21,7 @@ def prepareImage(imageName):
 
 def refineImage(im2, filename):
     thresh = measure_root_mass(filename)
-    mask = im2 < 150  # Value selected by looking at the histogram
+    mask = im2 < thresh  # Value selected by looking at the histogram
     plt.imshow(mask, cmap='gray')
 
     # Remove small white regions and keep only the largest connected region

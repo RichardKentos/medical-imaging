@@ -5,14 +5,20 @@ import matplotlib.pyplot as plt
 import skimage.filters as filters
 from skimage import io, measure
 from prepareImage import *
+from testthreshold import *
 
 # Prepare an image
-filename = 'data/images/guide_images/PAT_562_1110_360.png'
+filename = 'data/images/imgs_part_1/PAT_53_82_940.png'
 im2 = prepareImage(filename)
+plt.imshow(im2)
+plt.show()
 gray = refineImage(im2, filename)
+plt.imshow(gray)
+plt.show()
 
 # Threshold the image to segment the lesion
-thresh = filters.threshold_otsu(gray)
+thresh = measure_root_mass(filename)/255
+#thresh = filters.threshold_otsu(gray)
 mask = gray > thresh
 
 # Label the connected regions in the mask
