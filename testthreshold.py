@@ -1,12 +1,8 @@
-import matplotlib
-import numpy as np
-import glob
-import matplotlib.pyplot as plt
+
 import imageio as iio
 import skimage.color
 import skimage.filters
-from ipywidgets.widgets import widget
-#matplotlib widget
+
 
 def measure_root_mass(filename, sigma=1.0):
 
