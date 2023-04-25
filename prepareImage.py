@@ -6,6 +6,7 @@ from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 from skimage.transform import resize
 from testthreshold import *
+from testthreshold import *
 
 
 def prepareImage(imageName):
@@ -20,10 +21,8 @@ def prepareImage(imageName):
 
 
 def refineImage(im2, filename):
-    # Value selected by looking at the histogram
     thresh = measure_root_mass(filename)
-
-    mask = im2 < thresh
+    mask = im2 < thresh  # Value selected by looking at the histogram
     plt.imshow(mask, cmap='gray')
 
     # Remove small white regions and keep only the largest connected region
