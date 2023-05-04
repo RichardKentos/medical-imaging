@@ -5,6 +5,10 @@ from skimage import morphology, measure
 from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 from skimage.transform import resize
+from skimage import *
+import imageio as iio
+import skimage.color
+import skimage.filters
 
 
 def prepareImage(imageName):
@@ -14,6 +18,17 @@ def prepareImage(imageName):
     im2 = rgb2gray(im2)*256
     im = resize(im, (im.shape[0] // 4, im.shape[1] // 4), anti_aliasing=True)
     return im2
+
+
+def measure_root_mass(filename, sigma=1.0):
+    # read the original image, converting to grayscale on the fly
+    image = iio.imread(uri=filename)
+    # blur before thresholding
+    blurred_image = skimage.filters.gaussian(image, sigma=sigma)
+    # perform automatic thresholding to produce a binary image
+    t = skimage.filters.threshold_otsu(blurred_image)
+    binary_mask = blurred_image > t
+    return t*255
 
 
 def refineImage(im2, filename):
