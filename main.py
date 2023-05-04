@@ -10,16 +10,16 @@ from skimage.transform import resize
 import os
 from symmetry import *
 
-folder_dir = "data/images/TestImagesPart2"
-for images in os.listdir(folder_dir):
+#folder_dir = "data/images/TestImagesPart2"
+#for images in os.listdir(folder_dir):
     # check if the image ends with png
-    if (images.endswith(".png")):
-        print(is_symmetric(f"{folder_dir}/{images}"))
+ #   if (images.endswith(".png")):
+  #      print(is_symmetric(f"{folder_dir}/{images}"))
 
 
-def mainfunction():
+def mainfunction(path):
     # data/images/imgs_part_1/PAT_53_82_940.pn
-    imgfile = plt.imread("data/images/guide_images/PAT_72_110_647.png")
+    imgfile = plt.imread(path)
     # data/images/guide_images/PAT_72_110_647.png
     # data/images/guide_images/PAT_577_1107_61.png
     imgfile = cv2.resize(imgfile, (512, 512))
@@ -89,5 +89,6 @@ def mainfunction():
     plt.imshow(selection)
     plt.show()  # show the segmented lesion
 
+    #return selection
 
-# mainfunction()
+mainfunction("data/images/guide_images/PAT_72_110_647.png")
