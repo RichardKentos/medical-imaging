@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
+from symmetry import *
 
 # Import packages for image processing
 from skimage import morphology  # for measuring things in the masks
@@ -20,11 +21,12 @@ from skimage import morphology  # for measuring things in the masks
 
 # Main function to extract features from an image, that calls other functions
 def extract_features(image):
-    [r, g, b] = get_pixel_rgb(image)
+    # [r, g, b] = get_pixel_rgb(image)
+    symmetry_ratio = is_symmetric(image)
 
     # Here you need to add more of your custom-made functions for measuring features!
-
-    return np.array([r, g, b], dtype=np.float16)
+    return symmetry_ratio
+    # return np.array([r, g, b], dtype=np.float16)
 
 
 # Extracts the RGB values at location 100, 100. Example feature, probably not very useful
@@ -45,12 +47,13 @@ def get_pixel_rgb(image):
 
 
 # Where is the raw data
-file_data = Path("data\metadata.csv") #'..' + os.path.sep + 'data' + os.path.sep + 'metadata.csv'
-path_image = Path('data\images\imgs_part_1') #'..' + os.path.sep + 'data' + os.path.sep + 'images' + os.path.sep + 'imgs_part_1'
-
+# '..' + os.path.sep + 'data' + os.path.sep + 'metadata.csv'
+file_data = Path("data/metadata.csv")
+# '..' + os.path.sep + 'data' + os.path.sep + 'images' + os.path.sep + 'imgs_part_1'
+path_image = Path('data/images/imgs_part_1')
 
 # Where we will store the features
-file_features = Path('features/features.csv')
+file_features = Path('features/symmetry.csv')
 
 # Read meta-data into a Pandas dataframe
 df = pd.read_csv(file_data)
@@ -66,7 +69,8 @@ is_nevus = label == 'NEV'
 num_images = 100
 
 # Make array to store features
-feature_names = ['red', 'green', 'blue']
+# feature_names = ['red', 'green', 'blue']
+feature_names = ['symmetry']
 num_features = len(feature_names)
 features = np.empty([num_images, num_features], dtype=np.float16)
 
@@ -74,16 +78,15 @@ features = np.empty([num_images, num_features], dtype=np.float16)
 for i in np.arange(num_images):
 
     # Define filenames related to this image
-    #TODO make this work for Mac with the "/"
+    # TODO make this work for Mac with the "/"
     file_image = path_image / image_id[i]
 
     if exists(file_image):
         # Read the image
-        im = plt.imread(file_image)
-        im = np.float16(im)
-
+        # im = plt.imread(file_image)
+        # im = np.float16(im)
         # Measure features - this does not do anything too useful yet!
-        x = extract_features(im)
+        x = extract_features(file_image)
 
         # Store in the variable we created before
         features[i, 0:num_features] = x
@@ -91,4 +94,3 @@ for i in np.arange(num_images):
 # Save the features to a file
 df_features = pd.DataFrame(features, columns=feature_names)
 df_features.to_csv(file_features, index=False)
-

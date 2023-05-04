@@ -7,15 +7,14 @@ from skimage import morphology, measure
 from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 from skimage.transform import resize
-from experiments.testthreshold import *
 import os
 from symmetry import *
 
-folder_dir = "data/images/imgs_part_1"
+folder_dir = "data/images/TestImagesPart2"
 for images in os.listdir(folder_dir):
     # check if the image ends with png
     if (images.endswith(".png")):
-        print(is_symmetric(f"data/images/imgs_part_1/{images}"))
+        print(is_symmetric(f"{folder_dir}/{images}"))
 
 
 def mainfunction():
@@ -77,7 +76,7 @@ def mainfunction():
         binary_mask = morphology.binary_dilation(binary_mask, struct_el)
     else:
         # If there are no labeled regions, create a blank mask of the same shape as the input image
-        binary_mask = np.zeros_like(blurred_image)
+        binary_mask = np.zeros_like(blurred_image, dtype='uint8')
 
     fig, ax = plt.subplots()
     plt.imshow(binary_mask, cmap="gray")  # show the black/white segmentation
