@@ -1,6 +1,6 @@
 import numpy as np
 from prepareImage import *
-from segmentation import *
+from main import *
 
 
 filename = 'data/images/imgs_part_1/PAT_585_1130_552.png'

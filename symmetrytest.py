@@ -1,7 +1,7 @@
 from skimage import transform
 import matplotlib.pyplot as plt
 import numpy as np
-from segmentation import *
+from main import *
 from prepareImage import *
 
 # filename = 'data/images/imgs_part_1/PAT_564_1079_430.png'
