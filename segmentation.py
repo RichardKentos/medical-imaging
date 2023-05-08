@@ -10,21 +10,21 @@ from skimage.transform import resize
 import os
 from symmetry import *
 
-folder_dir = "data/images/TestImagesPart2"
-for images in os.listdir(folder_dir):
-    # check if the image ends with png
-    if (images.endswith(".png")):
-        print(is_symmetric(f"{folder_dir}/{images}"))
+folder_dir = "data/images/guide_images"
+# for images in os.listdir(folder_dir):
+#     # check if the image ends with png
+#     if (images.endswith(".png")):
+#         print(is_symmetric(f"{folder_dir}/{images}"))
 
 
-def mainfunction():
+def mainfunction(filename):
     # data/images/imgs_part_1/PAT_53_82_940.pn
-    imgfile = plt.imread("data/images/guide_images/PAT_72_110_647.png")
+    imgfile = plt.imread(filename)
     # data/images/guide_images/PAT_72_110_647.png
     # data/images/guide_images/PAT_577_1107_61.png
     imgfile = cv2.resize(imgfile, (512, 512))
 
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
     # plt.imshow(imgfile)
 
     # convert the image to grayscale
@@ -47,10 +47,10 @@ def mainfunction():
 
     # perform automatic thresholding
     t = skimage.filters.threshold_otsu(blurred_image)
-    x = skimage.filters.try_all_threshold(blurred_image)
+    # x = skimage.filters.try_all_threshold(blurred_image)
     # print(x)
 
-    print("Found automatic threshold t = {}.".format(t))
+    # print("Found automatic threshold t = {}.".format(t))
 
     # create a binary mask with the threshold found by Otsu's method
     binary_mask = blurred_image < t
@@ -78,16 +78,14 @@ def mainfunction():
         # If there are no labeled regions, create a blank mask of the same shape as the input image
         binary_mask = np.zeros_like(blurred_image, dtype='uint8')
 
-    fig, ax = plt.subplots()
-    plt.imshow(binary_mask, cmap="gray")  # show the black/white segmentation
+    # fig, ax = plt.subplots()
+    # plt.imshow(binary_mask, cmap="gray")  # show the black/white segmentation
 
     # apply the binary mask to select the foreground
     selection = imgfile.copy()
     selection[~binary_mask] = 0
 
-    fig, ax = plt.subplots()
-    plt.imshow(selection)
-    plt.show()  # show the segmented lesion
-
-
-# mainfunction()
+    # fig, ax = plt.subplots()
+    # plt.imshow(selection)
+    # plt.show()  # show the segmented lesion
+    return selection

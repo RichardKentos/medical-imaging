@@ -54,3 +54,7 @@ def refineImage(im2, filename):
         # If there are no labeled regions, create a blank mask of the same shape as the input image
         mask = np.zeros_like(im2)
     return mask
+
+
+# filename = 'data/images/imgs_part_1/PAT_585_1130_474.png'
+# print(refineImage(prepareImage(filename), filename))

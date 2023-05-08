@@ -5,6 +5,8 @@ from skimage import io, color, measure
 from scipy.spatial.distance import cdist
 import cv2
 
+filename = 'data/images/imgs_part_1/PAT_585_1130_552.png'
+
 
 def is_symmetric(filename):
     # Load the image
@@ -50,6 +52,7 @@ def is_symmetric(filename):
     # Compute the ratio of the mean distances between the left and right halves
     symmetry_ratio = left_mean_distance / right_mean_distance
     return symmetry_ratio
+
     # # If the ratio is close to 1, the lesion is symmetric
     # if 0.9 <= symmetry_ratio <= 1.1:
     #     print('The lesion is symmetric')
