@@ -12,7 +12,7 @@ import matplotlib.image as mpimg
 from PIL import Image
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
-im1= mainfunction('data/images/imgs_part_1/PAT_9_17_80.png')
+im1= segmentImage('data/images/imgs_part_1/PAT_9_17_80.png')
 example_im = im1
 
 # Divide the pixels into segments of similar color

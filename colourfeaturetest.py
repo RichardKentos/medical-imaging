@@ -1,23 +1,9 @@
 import statistics
-
-from matplotlib.colors import rgb2hex
-from skimage.segmentation import slic, mark_boundaries
-from prepareImage import *
-from matplotlib import *
-from main import *
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.image as mpimg
-import cv2
 import extcolors
-from main import *
-
-from colormap import rgb2hex
+from imagesegmentation import *
 
 from PIL import Image
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+
 
 
 def exact_color(input_image, resize, tolerance, zoom):
@@ -30,7 +16,7 @@ def exact_color(input_image, resize, tolerance, zoom):
 
     # resize
     output_width = resize
-    img = Image.fromarray((mainfunction(input_image) * 255).astype(np.uint8))
+    img = Image.fromarray((segmentImage(input_image) * 255).astype(np.uint8))
     if img.size[0] >= resize:
         wpercent = (output_width / float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
@@ -80,7 +66,7 @@ def exact_color(input_image, resize, tolerance, zoom):
     # plt.setp(wedges, width=0.3)
     #
     # # add image in the center of donut plot
-    # extracted = mainfunction(resize_name)
+    # extracted = segmentImage(resize_name)
     # imagebox = OffsetImage(extracted, zoom=zoom)
     # ab = AnnotationBbox(imagebox, (0, 0))
     # ax1.add_artist(ab)
@@ -121,4 +107,4 @@ def exact_color(input_image, resize, tolerance, zoom):
 #     return df
 
 
-print(exact_color("data/images/guide_images/PAT_72_110_647.png", 900, 12, 2.5))
+#print(exact_color("data/images/guide_images/PAT_72_110_647.png", 900, 12, 2.5))
