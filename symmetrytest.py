@@ -4,7 +4,7 @@ import numpy as np
 from main import *
 from prepareImage import *
 
-imgname = 'data/images/imgs_part_1/PAT_585_1130_552.png'
+imgname = "data/images/TestImagesPart2/ball2.png"#'data/images/imgs_part_1/PAT_585_1130_552.png'
 # imgname = 'data/images/TestImagesPart2/ball.png'
 
 

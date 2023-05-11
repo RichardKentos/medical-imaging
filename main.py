@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from skimage.transform import resize
 import os
 from symmetry import *
+from PIL import Image
 
 folder_dir = "data/images/guide_images"
 # for images in os.listdir(folder_dir):
@@ -23,7 +24,7 @@ def mainfunction(filename):
     # data/images/guide_images/PAT_72_110_647.png
     # data/images/guide_images/PAT_577_1107_61.png
     imgfile = cv2.resize(imgfile, (512, 512))
-
+    #imgfile = imgfile[..., 0:3]
     # fig, ax = plt.subplots()
     # plt.imshow(imgfile)
 
@@ -85,12 +86,7 @@ def mainfunction(filename):
     selection = imgfile.copy()
     selection[~binary_mask] = 0
 
-    # fig, ax = plt.subplots()
-    # plt.imshow(selection)
-    # plt.show()  # show the segmented lesion
+    #fig, ax = plt.subplots()
+    #plt.imshow(selection)
+    #plt.show()  # show the segmented lesion
     return selection
-
-
-# print(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
-# plt.imshow(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
-# plt.show()

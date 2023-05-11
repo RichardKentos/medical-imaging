@@ -28,7 +28,7 @@ def exact_color(input_image, resize, tolerance, zoom):
 
     # resize
     output_width = resize
-    img = Image.open(input_image)
+    img = Image.fromarray((mainfunction(input_image) * 255).astype(np.uint8))
     if img.size[0] >= resize:
         wpercent = (output_width / float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
@@ -38,13 +38,14 @@ def exact_color(input_image, resize, tolerance, zoom):
     else:
         resize_name = input_image
 
-    # crate dataframe
+    # crate dataframeA
     img_url = resize_name
-    colors_x = extcolors.extract_from_path(img_url, tolerance=tolerance, limit=13)
+    colors_x = extcolors.extract_from_image(img, tolerance=tolerance, limit=13)
     df_color = color_to_df(colors_x)
 
-    print(colors_x)
-    print(df_color)
+    #this here is the rgb values and the hex codes and percentages, we can do something with it
+    print(colors_x) #rgb values and occurence
+
     # annotate text
     list_color = list(df_color['c_code'])
     list_precent = [int(i) for i in list(df_color['occurence'])]
@@ -100,19 +101,5 @@ def color_to_df(input):
 
     df = pd.DataFrame(zip(df_color_up, df_percent), columns=['c_code', 'occurence'])
     return df
-
-def numpy2pil(np_array: np.ndarray) -> Image:
-    """
-    Convert an HxWx3 numpy array into an RGB Image
-    """
-
-    assert_msg = 'Input shall be a HxWx3 ndarray'
-    assert isinstance(np_array, np.ndarray), assert_msg
-    assert len(np_array.shape) == 3, assert_msg
-    assert np_array.shape[2] == 3, assert_msg
-
-    img = Image.fromarray(np_array, 'RGB')
-    return img
-#image = numpy2pil(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
 
 exact_color("data/images/guide_images/PAT_72_110_647.png",900,12,2.5)
