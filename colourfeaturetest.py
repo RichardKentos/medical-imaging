@@ -10,6 +10,7 @@ import matplotlib.patches as patches
 import matplotlib.image as mpimg
 import cv2
 import extcolors
+from main import *
 
 from colormap import rgb2hex
 
@@ -59,8 +60,8 @@ def exact_color(input_image, resize, tolerance, zoom):
     plt.setp(wedges, width=0.3)
 
     # add image in the center of donut plot
-    img = mpimg.imread(resize_name)
-    imagebox = OffsetImage(img, zoom=zoom)
+    extracted = mainfunction(resize_name)
+    imagebox = OffsetImage(extracted, zoom=zoom)
     ab = AnnotationBbox(imagebox, (0, 0))
     ax1.add_artist(ab)
 
@@ -113,4 +114,5 @@ def numpy2pil(np_array: np.ndarray) -> Image:
     img = Image.fromarray(np_array, 'RGB')
     return img
 #image = numpy2pil(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
+
 exact_color("data/images/guide_images/PAT_72_110_647.png",900,12,2.5)
