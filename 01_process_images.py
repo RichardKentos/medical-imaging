@@ -8,7 +8,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
-from symmetry import *
+from symmetrytest import *
+from diameter import *
 
 # Import packages for image processing
 from skimage import morphology  # for measuring things in the masks
@@ -22,10 +23,10 @@ from skimage import morphology  # for measuring things in the masks
 # Main function to extract features from an image, that calls other functions
 def extract_features(image):
     # [r, g, b] = get_pixel_rgb(image)
-    symmetry_ratio = is_symmetric(image)
-
+    symmetry_difference = getSymmetry(image)
+    diameter = getDiameter(image)
     # Here you need to add more of your custom-made functions for measuring features!
-    return symmetry_ratio
+    return [diameter, symmetry_difference]
     # return np.array([r, g, b], dtype=np.float16)
 
 
@@ -66,11 +67,11 @@ label = np.array(df['diagnostic'])
 is_nevus = label == 'NEV'
 
 # For now I just take the first 100...
-num_images = 100
+num_images = 10
 
 # Make array to store features
 # feature_names = ['red', 'green', 'blue']
-feature_names = ['symmetry']
+feature_names = ['diameter', 'symmetry difference']
 num_features = len(feature_names)
 features = np.empty([num_images, num_features], dtype=np.float16)
 
@@ -82,6 +83,7 @@ for i in np.arange(num_images):
     file_image = path_image / image_id[i]
 
     if exists(file_image):
+        print('exists')
         # Read the image
         # im = plt.imread(file_image)
         # im = np.float16(im)

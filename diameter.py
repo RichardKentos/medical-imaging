@@ -6,9 +6,8 @@ from main import *
 imgname = 'data/images/imgs_part_1/PAT_585_1130_552.png'
 
 
-def getDiameterTest(filename):
+def getDiameter(filename):
     segmented = mainfunction(filename)
-    print(segmented)
     # Measure diameter of the lesion: measure height or width of the mask
     # How many 1's in each column of the image (sum over axis 0, i.e. rows)
     pixels_in_col = np.sum(segmented, axis=0)
@@ -19,4 +18,4 @@ def getDiameterTest(filename):
     return diameter
 
 
-print(getDiameterTest(imgname))
+# print(getDiameter(imgname))
