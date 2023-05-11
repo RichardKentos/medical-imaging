@@ -20,7 +20,7 @@ def getSymmetry(filename):
         pixels2 = pixels2.astype(np.int8)
         diameter = np.max(pixels_in_col)
         distances.append(diameter)
-    return (max(distances) - min(distances)) / len(distances)
+    return max(distances) - min(distances)
 
 
 print(getSymmetry(imgname))
