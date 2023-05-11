@@ -2,8 +2,17 @@
 from skimage.segmentation import slic, mark_boundaries
 from prepareImage import *
 from matplotlib import *
+from main import *
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import matplotlib.image as mpimg
 
-im1= prepareImage('data/images/imgs_part_1/PAT_9_17_80.png')
+from PIL import Image
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+
+im1= mainfunction('data/images/imgs_part_1/PAT_9_17_80.png')
 example_im = im1
 
 # Divide the pixels into segments of similar color
