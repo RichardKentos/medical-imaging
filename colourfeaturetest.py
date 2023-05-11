@@ -19,25 +19,6 @@ from colormap import rgb2hex
 from PIL import Image
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
-img = Image.fromarray((mainfunction("data/images/guide_images/PAT_72_110_647.png") * 255).astype(np.uint8))
-
-
-def image_colorfulness(image):
-    # split the image into its respective RGB components
-    (B, G, R) = cv2.split(image.astype("float"))
-    # compute rg = R - G
-    rg = np.absolute(R - G)
-    # compute yb = 0.5 * (R + G) - B
-    yb = np.absolute(0.5 * (R + G) - B)
-    # compute the mean and standard deviation of both `rg` and `yb`
-    (rbMean, rbStd) = (np.mean(rg), np.std(rg))
-    (ybMean, ybStd) = (np.mean(yb), np.std(yb))
-    # combine the mean and standard deviations
-    stdRoot = np.sqrt((rbStd ** 2) + (ybStd ** 2))
-    meanRoot = np.sqrt((rbMean ** 2) + (ybMean ** 2))
-    # derive the "colorfulness" metric and return it
-    return stdRoot + (0.3 * meanRoot)
-
 
 def exact_color(input_image, resize, tolerance, zoom):
     # background
