@@ -1,3 +1,5 @@
+import statistics
+
 from matplotlib.colors import rgb2hex
 from skimage.segmentation import slic, mark_boundaries
 from prepareImage import *
@@ -44,9 +46,26 @@ def exact_color(input_image, resize, tolerance, zoom):
     df_color = color_to_df(colors_x)
 
     #this here is the rgb values and the hex codes and percentages, we can do something with it
-    print(colors_x) #rgb values and occurence
+    #print(colors_x) #rgb values and occurence
+    colors_pre_list = str(colors_x).replace('([(', '').split(', (')[0:-1]
+    df_rgb = [i.split('), ')[0] + ')' for i in colors_pre_list]
 
+    r_list = []
+    g_list = []
+    b_list = []
+
+    for i in df_rgb: #does it for how many colours there are, so this one 3 times
+        r_list.append(int(i.split(", ")[0].replace("(", "")))
+        g_list.append(int(i.split(", ")[1]),)
+        b_list.append(int(i.split(", ")[2].replace(")", "")))
+
+    print("Variance of R value is % s"%(statistics.variance(r_list)))
+    print("Variance of G value is % s"%(statistics.variance(g_list)))
+    print("Variance of B value is % s"%(statistics.variance(b_list)))
+
+    #print(df_color)
     # annotate text
+    #the rest of this isnt needed, its just to show the image and such
     list_color = list(df_color['c_code'])
     list_precent = [int(i) for i in list(df_color['occurence'])]
     text_c = [c + ' ' + str(round(p * 100 / sum(list_precent), 1)) + '%' for c, p in zip(list_color, list_precent)]
@@ -85,7 +104,6 @@ def exact_color(input_image, resize, tolerance, zoom):
     bg = plt.imread('bg.png')
     plt.imshow(bg)
     plt.tight_layout()
-    print(list_color)
     return plt.show()
 
 
