@@ -89,5 +89,8 @@ def mainfunction(filename):
     # plt.imshow(selection)
     # plt.show()  # show the segmented lesion
     return selection
-plt.imshow(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
-plt.show()
+
+
+# print(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
+# plt.imshow(mainfunction("data/images/guide_images/PAT_72_110_647.png"))
+# plt.show()

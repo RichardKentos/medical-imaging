@@ -4,8 +4,8 @@ import numpy as np
 from main import *
 from prepareImage import *
 
-# filename = 'data/images/imgs_part_1/PAT_564_1079_430.png'
-imgname = 'data/images/TestImagesPart2/ball.png'
+imgname = 'data/images/imgs_part_1/PAT_585_1130_552.png'
+# imgname = 'data/images/TestImagesPart2/ball.png'
 
 
 def getSymmetry(filename):
@@ -18,10 +18,9 @@ def getSymmetry(filename):
         # Without this there are some non zeros and ones still because of the resizing
         pixels2 = pixels_in_col > 0
         pixels2 = pixels2.astype(np.int8)
-        diameter = np.max(pixels2)
+        diameter = np.max(pixels_in_col)
         distances.append(diameter)
-        print(diameter)
-    return max(distances) - min(distances)
+    return (max(distances) - min(distances)) / len(distances)
 
 
 print(getSymmetry(imgname))
