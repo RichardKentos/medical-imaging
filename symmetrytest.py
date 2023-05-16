@@ -1,17 +1,14 @@
 from skimage import transform
-import matplotlib.pyplot as plt
-import numpy as np
-from main import *
-from prepareImage import *
+from imagesegmentation import *
 
-imgname = 'data/images/imgs_part_1/PAT_585_1130_552.png'
+#imgname = "data/images/TestImagesPart2/ball2.png"#'data/images/imgs_part_1/PAT_585_1130_552.png'
 # imgname = 'data/images/TestImagesPart2/ball.png'
 
 
 def getSymmetry(filename):
     distances = []
     for angle in range(0, 180, 10):
-        segmented = mainfunction(filename)
+        segmented = segmentImage(filename)
         rot_im = transform.rotate(segmented, angle)
         # How many 1's in each column of the image (sum over axis 0, i.e. rows)
         pixels_in_col = np.sum(rot_im, axis=0)
@@ -23,4 +20,4 @@ def getSymmetry(filename):
     return max(distances) - min(distances)
 
 
-print(getSymmetry(imgname))
+#print(getSymmetry(imgname))
