@@ -15,18 +15,18 @@ def exact_color(input_image, resize, tolerance, zoom):
 
     # resize
     output_width = resize
-    img = Image.fromarray((segmentImage(input_image) * 255).astype(np.uint8))
+    img = Image.fromarray((input_image * 255).astype(np.uint8))
     if img.size[0] >= resize:
         wpercent = (output_width / float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
         img = img.resize((output_width, hsize), Image.ANTIALIAS)
-        resize_name = 'resize_' + input_image
-        img.save(resize_name)
-    else:
-        resize_name = input_image
+        #resize_name = 'resize_' + input_image
+        #img.save(resize_name)
+    #else:
+        #resize_name = input_image
 
     # crate dataframeA
-    img_url = resize_name
+    #img_url = resize_name
     colors_x = extcolors.extract_from_image(img, tolerance=tolerance, limit=13)
     #df_color = color_to_df(colors_x)
 
@@ -108,4 +108,4 @@ def exact_color(input_image, resize, tolerance, zoom):
 #     return df
 
 
-print(exact_color("data/images/imgs_part_1/PAT_233_354_935.png", 900, 12, 2.5))
+#print(exact_color(segmentImage("data/images/imgs_part_1/PAT_233_354_935.png"), 900, 12, 2.5))

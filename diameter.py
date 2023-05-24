@@ -4,8 +4,8 @@ from imagesegmentation import segmentImage
 from prepareImage import *
 
 
-def getDiameter(filename):
-    segmented = segmentImage(filename)
+def getDiameter(segImage):
+    segmented = segImage
     # Measure diameter of the lesion: measure height or width of the mask
     # How many 1's in each column of the image (sum over axis 0, i.e. rows)
     pixels_in_col = np.sum(segmented, axis=0)
@@ -15,4 +15,4 @@ def getDiameter(filename):
     diameter = np.max(pixels_in_col)
     return diameter
 
-# print(getDiameter(imgname))
+#print(getDiameter(segmentImage("data/images/imgs_part_1/PAT_32_44_211.png"))) #512

@@ -6,11 +6,11 @@ imgname = "data/images/imgs_part_1/PAT_32_44_211.png"
 # imgname = 'data/images/TestImagesPart2/ball.png'
 
 
-def getSymmetry(filename):
+def getSymmetry(segImage):
     diameters = []
     normalizations = []
     for angle in range(0, 180, 10):
-        segmented = segmentImage(filename)
+        segmented = segImage                        #segmentImage(filename)
         rot_im = transform.rotate(segmented, angle)
         # How many 1's in each column of the image (sum over axis 0, i.e. rows)
         pixels_in_col = np.sum(rot_im, axis=0)
@@ -27,4 +27,4 @@ def getSymmetry(filename):
     return difference
 
 
-# print(getSymmetry(imgname))
+#print(getSymmetry(segmentImage(imgname)))
