@@ -1,12 +1,14 @@
 from skimage import transform
 from imagesegmentation import *
 
-#imgname = "data/images/TestImagesPart2/ball2.png"#'data/images/imgs_part_1/PAT_585_1130_552.png'
+imgname = "data/images/imgs_part_1/PAT_32_44_211.png"
+# #'data/images/imgs_part_1/PAT_585_1130_552.png'
 # imgname = 'data/images/TestImagesPart2/ball.png'
 
 
 def getSymmetry(filename):
-    distances = []
+    diameters = []
+    normalizations = []
     for angle in range(0, 180, 10):
         segmented = segmentImage(filename)
         rot_im = transform.rotate(segmented, angle)
@@ -16,8 +18,13 @@ def getSymmetry(filename):
         pixels2 = pixels_in_col > 0
         pixels2 = pixels2.astype(np.int8)
         diameter = np.max(pixels_in_col)
-        distances.append(diameter)
-    return max(distances) - min(distances)
+        diameters.append(diameter)
+    for diameter in diameters:
+        normalized = (diameter - min(diameters)) / \
+            (max(diameters) - min(diameters))
+        normalizations.append(normalized)
+    difference = max(diameters) - min(diameters)
+    return difference
 
 
-#print(getSymmetry(imgname))
+# print(getSymmetry(imgname))

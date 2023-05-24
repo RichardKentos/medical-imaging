@@ -38,7 +38,6 @@ def get_pixel_rgb(image):
     r = image[x_coord, y_coord, 0]
     g = image[x_coord, y_coord, 1]
     b = image[x_coord, y_coord, 2]
-
     return r, g, b
 
 
@@ -67,7 +66,7 @@ label = np.array(df['diagnostic'])
 is_nevus = label == 'NEV'
 
 # For now I just take the first 100...
-num_images = 10
+num_images = 150
 
 # Make array to store features
 # feature_names = ['red', 'green', 'blue']
@@ -77,19 +76,16 @@ features = np.empty([num_images, num_features], dtype=np.float16)
 
 # Loop through all images
 for i in np.arange(num_images):
-
     # Define filenames related to this image
     # TODO make this work for Mac with the "/"
     file_image = path_image / image_id[i]
 
     if exists(file_image):
-        print('exists')
         # Read the image
         # im = plt.imread(file_image)
         # im = np.float16(im)
         # Measure features - this does not do anything too useful yet!
         x = extract_features(file_image)
-
         # Store in the variable we created before
         features[i, 0:num_features] = x
 

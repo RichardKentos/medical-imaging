@@ -80,3 +80,6 @@ def segmentImage(filename):
     # plt.imshow(selection)
     # plt.show()  # show the segmented lesion
     return selection
+
+
+segmentImage('data/images/imgs_part_1/PAT_233_354_935.png')

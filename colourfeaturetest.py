@@ -5,7 +5,6 @@ from imagesegmentation import *
 from PIL import Image
 
 
-
 def exact_color(input_image, resize, tolerance, zoom):
     # background
     bg = 'bg.png'
@@ -44,11 +43,13 @@ def exact_color(input_image, resize, tolerance, zoom):
         r_list.append(int(i.split(", ")[0].replace("(", "")))
         g_list.append(int(i.split(", ")[1]), )
         b_list.append(int(i.split(", ")[2].replace(")", "")))
-
-    r_var = statistics.variance(r_list)
-    g_var = statistics.variance(g_list)
-    b_var = statistics.variance(b_list)
-    return r_var,g_var,b_var
+    if len(r_list) > 1 or len(g_list) > 1 or len(b_list) > 1:
+        r_var = statistics.variance(r_list)
+        g_var = statistics.variance(g_list)
+        b_var = statistics.variance(b_list)
+        return r_var, g_var, b_var
+    else:
+        return 0, 0, 0
     # print(df_color)
     # annotate text
     # the rest of this isnt needed, its just to show the image and such
@@ -107,4 +108,4 @@ def exact_color(input_image, resize, tolerance, zoom):
 #     return df
 
 
-#print(exact_color("data/images/guide_images/PAT_72_110_647.png", 900, 12, 2.5))
+print(exact_color("data/images/imgs_part_1/PAT_233_354_935.png", 900, 12, 2.5))
