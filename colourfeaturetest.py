@@ -7,11 +7,11 @@ from PIL import Image
 
 def exact_color(input_image, resize, tolerance, zoom):
     # background
-    bg = 'bg.png'
-    fig, ax = plt.subplots(figsize=(192, 108), dpi=10)
-    fig.set_facecolor('white')
-    plt.savefig(bg)
-    plt.close(fig)
+    #bg = 'bg.png'
+    #fig, ax = plt.subplots(figsize=(192, 108), dpi=10)
+    #fig.set_facecolor('white')
+    #plt.savefig(bg)
+    #plt.close(fig)
 
     # resize
     output_width = resize
