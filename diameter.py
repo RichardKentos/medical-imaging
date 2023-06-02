@@ -1,7 +1,17 @@
 import numpy as np
 
-from imagesegmentation import segmentImage
-from prepareImage import *
+"""
+Measure the diameter of a segmented image.
+
+This function measures the diameter of a segmented image by analyzing the pixel distribution in each column of the
+image. The maximum value in the column sums represents the diameter.
+
+Args:
+    segImage (numpy.ndarray): The segmented image to measure the diameter of.
+
+Returns:
+    int: The diameter of the segmented image.
+"""
 
 
 def getDiameter(segImage):
@@ -14,5 +24,3 @@ def getDiameter(segImage):
     pixels2 = pixels2.astype(np.int8)
     diameter = np.max(pixels_in_col)
     return diameter
-
-#print(getDiameter(segmentImage("data/images/imgs_part_1/PAT_32_44_211.png"))) #512

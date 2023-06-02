@@ -1,16 +1,26 @@
 from skimage import transform
-from imagesegmentation import *
+import numpy as np
 
-imgname = "data/images/imgs_part_1/PAT_32_44_211.png"
-# #'data/images/imgs_part_1/PAT_585_1130_552.png'
-# imgname = 'data/images/TestImagesPart2/ball.png'
+"""
+Calculate the symmetry of a segmented image.
+
+This function calculates the symmetry of a segmented image by rotating it at different angles and analyzing the
+distribution of pixels in each column. The difference between the maximum and minimum diameters is returned as a
+measure of symmetry.
+
+Args:
+    segImage (numpy.ndarray): The segmented image to analyze.
+
+Returns:
+    float: The difference between the maximum and minimum diameters, indicating the symmetry of the image.
+"""
 
 
 def getSymmetry(segImage):
     diameters = []
     normalizations = []
     for angle in range(0, 180, 10):
-        segmented = segImage                        #segmentImage(filename)
+        segmented = segImage
         rot_im = transform.rotate(segmented, angle)
         # How many 1's in each column of the image (sum over axis 0, i.e. rows)
         pixels_in_col = np.sum(rot_im, axis=0)
@@ -21,10 +31,7 @@ def getSymmetry(segImage):
         diameters.append(diameter)
     for diameter in diameters:
         normalized = (diameter - min(diameters)) / \
-            (max(diameters) - min(diameters))
+                     (max(diameters) - min(diameters))
         normalizations.append(normalized)
     difference = max(diameters) - min(diameters)
     return difference
-
-
-#print(getSymmetry(segmentImage(imgname)))

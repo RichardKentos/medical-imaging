@@ -1,5 +1,11 @@
 # fyp2023
 
+# Running the program
+To run the program and output the csv file needed for training the model, run the main function in main.py, to train the model and evaluate it run the train.py script.
+
+
+# Project structure
+
 Use the public dataset from https://data.mendeley.com/datasets/zr7vgbcyr2/1 . The data should go in the same level, as the code of this repository, and stay in the same organisation as when you download it. 
 
 ```
@@ -12,6 +18,7 @@ Use the public dataset from https://data.mendeley.com/datasets/zr7vgbcyr2/1 . Th
 ```
 # docs-link
 https://docs.google.com/document/d/1-Q4EINBhwPCZi6esEOXEo0uqEDvp8DRQ_WjaSZTCV2A/edit?fbclid=IwAR2M1bviOWjWwZqRLjNabdOmKeds8ILVNQZEVurbokewX2fb0pLfSdpEQdg
+
 
 # Reference
 

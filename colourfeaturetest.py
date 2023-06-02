@@ -4,14 +4,26 @@ from imagesegmentation import *
 
 from PIL import Image
 
+"""
+Extract the exact colors and calculate color variances from an input image.
+
+This function resizes the input image, extracts the colors using a given tolerance, and calculates the variances of
+the red, green, and blue color channels. If there are multiple colors extracted, the variances are returned. If
+there is only one color or no colors extracted, zero variances are returned.
+
+Args:
+    input_image (numpy.ndarray): The input image as a NumPy array.
+    resize (int): The desired width of the image after resizing.
+    tolerance (int): The tolerance value for color extraction.
+    zoom (float): The zoom factor for resizing the image.
+
+Returns:
+    tuple: A tuple containing the red, green, and blue color variances. If there are multiple colors extracted,
+        the variances are returned. Otherwise, zero variances are returned.
+"""
+
 
 def exact_color(input_image, resize, tolerance, zoom):
-    # background
-    #bg = 'bg.png'
-    #fig, ax = plt.subplots(figsize=(192, 108), dpi=10)
-    #fig.set_facecolor('white')
-    #plt.savefig(bg)
-    #plt.close(fig)
 
     # resize
     output_width = resize
@@ -20,18 +32,9 @@ def exact_color(input_image, resize, tolerance, zoom):
         wpercent = (output_width / float(img.size[0]))
         hsize = int((float(img.size[1]) * float(wpercent)))
         img = img.resize((output_width, hsize), Image.ANTIALIAS)
-        #resize_name = 'resize_' + input_image
-        #img.save(resize_name)
-    #else:
-        #resize_name = input_image
 
-    # crate dataframeA
-    #img_url = resize_name
     colors_x = extcolors.extract_from_image(img, tolerance=tolerance, limit=13)
-    #df_color = color_to_df(colors_x)
 
-    # this here is the rgb values and the hex codes and percentages, we can do something with it
-    # print(colors_x) #rgb values and occurence
     colors_pre_list = str(colors_x).replace('([(', '').split(', (')[0:-1]
     df_rgb = [i.split('), ')[0] + ')' for i in colors_pre_list]
 
@@ -50,62 +53,3 @@ def exact_color(input_image, resize, tolerance, zoom):
         return r_var, g_var, b_var
     else:
         return 0, 0, 0
-    # print(df_color)
-    # annotate text
-    # the rest of this isnt needed, its just to show the image and such
-    # list_color = list(df_color['c_code'])
-    # list_precent = [int(i) for i in list(df_color['occurence'])]
-    # text_c = [c + ' ' + str(round(p * 100 / sum(list_precent), 1)) + '%' for c, p in zip(list_color, list_precent)]
-    # fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(160, 120), dpi=10)
-    #
-    # # donut plot
-    # wedges, text = ax1.pie(list_precent,
-    #                        labels=text_c,
-    #                        labeldistance=1.05,
-    #                        colors=list_color,
-    #                        textprops={'fontsize': 150, 'color': 'black'})
-    # plt.setp(wedges, width=0.3)
-    #
-    # # add image in the center of donut plot
-    # extracted = segmentImage(resize_name)
-    # imagebox = OffsetImage(extracted, zoom=zoom)
-    # ab = AnnotationBbox(imagebox, (0, 0))
-    # ax1.add_artist(ab)
-    #
-    # # color palette
-    # x_posi, y_posi, y_posi2 = 160, -170, -170
-    # for c in list_color:
-    #     if list_color.index(c) <= 5:
-    #         y_posi += 180
-    #         rect = patches.Rectangle((x_posi, y_posi), 360, 160, facecolor=c)
-    #         ax2.add_patch(rect)
-    #         ax2.text(x=x_posi + 400, y=y_posi + 100, s=c, fontdict={'fontsize': 190})
-    #     else:
-    #         y_posi2 += 180
-    #         rect = patches.Rectangle((x_posi + 1000, y_posi2), 360, 160, facecolor=c)
-    #         ax2.add_artist(rect)
-    #         ax2.text(x=x_posi + 1400, y=y_posi2 + 100, s=c, fontdict={'fontsize': 190})
-    #
-    # fig.set_facecolor('white')
-    # ax2.axis('off')
-    # bg = plt.imread('bg.png')
-    # plt.imshow(bg)
-    # plt.tight_layout()
-    # return plt.show()
-
-
-# def color_to_df(input):
-#     colors_pre_list = str(input).replace('([(', '').split(', (')[0:-1]
-#     df_rgb = [i.split('), ')[0] + ')' for i in colors_pre_list]
-#     df_percent = [i.split('), ')[1].replace(')', '') for i in colors_pre_list]
-#
-#     # convert RGB to HEX code
-#     df_color_up = [rgb2hex(int(i.split(", ")[0].replace("(", "")),
-#                            int(i.split(", ")[1]),
-#                            int(i.split(", ")[2].replace(")", ""))) for i in df_rgb]
-#
-#     df = pd.DataFrame(zip(df_color_up, df_percent), columns=['c_code', 'occurence'])
-#     return df
-
-
-#print(exact_color(segmentImage("data/images/imgs_part_1/PAT_233_354_935.png"), 900, 12, 2.5))

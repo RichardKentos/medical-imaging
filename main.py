@@ -1,4 +1,3 @@
-
 from colourfeaturetest import *
 from symmetrytest import *
 from diameter import *
@@ -6,6 +5,16 @@ from imagesegmentation import *
 import csv
 import os
 
+"""
+This function processes a set of images and extracts features from them.
+It writes the extracted data to a CSV file named 'featuresFile.csv'.
+
+Parameters:
+    None
+
+Returns:
+    None
+"""
 
 def main():
     # loop through each image in the folder and apply the appropiate methods and write to the csv file
@@ -31,11 +40,10 @@ def main():
                             Rvar, gvar, bvar = exact_color(segmentedImage, 900, 12, 2.5)
                             healthy = 0
                             diameter = getDiameter(segmentedImage)
-                            data = [image_id, symmetry, Rvar,gvar, bvar, diameter, row[-9], healthy]
+                            data = [image_id, symmetry, Rvar, gvar, bvar, diameter, row[-9], healthy]
                             writer.writerow(data)
                             added += 1
                             addedcancer += 1
-                            # print(added)
                             if added == 204:
                                 return
                 if row[-9] == "NEV" or row[-9] == "SEK":
@@ -47,13 +55,11 @@ def main():
                             Rvar, gvar, bvar = exact_color(segmentedImage, 900, 12, 2.5)
                             healthy = 1
                             diameter = getDiameter(segmentedImage)
-                            data = [image_id, symmetry, Rvar,gvar, bvar, diameter, row[-9], healthy]
+                            data = [image_id, symmetry, Rvar, gvar, bvar, diameter, row[-9], healthy]
                             writer.writerow(data)
                             added += 1
-                            # print(added)
                             if added == 204:
                                 return
-
 
 
 if __name__ == "__main__":

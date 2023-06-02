@@ -7,41 +7,33 @@ from skimage import morphology, measure
 from skimage.color import rgb2gray
 import matplotlib.pyplot as plt
 
+"""
+Segment an input image using various image processing techniques.
+
+This function loads an image, performs image processing operations such as resizing, grayscale conversion, blurring,
+thresholding, and morphological operations to create a binary mask that selects the foreground. The foreground is
+then extracted from the original image using the binary mask.
+
+Args:
+    filename (str): The path of the image file to segment.
+
+Returns:
+    numpy.ndarray: The segmented image where the foreground is selected, and the rest is set to zero.
+"""
+
 
 def segmentImage(filename):
-    # data/images/imgs_part_1/PAT_53_82_940.pn
     imgfile = plt.imread(filename)
-    # data/images/guide_images/PAT_72_110_647.png
-    # data/images/guide_images/PAT_577_1107_61.png
     imgfile = cv2.resize(imgfile, (512, 512))
-    # imgfile = imgfile[..., 0:3]
-    # fig, ax = plt.subplots()
-    # plt.imshow(imgfile)
 
     # convert the image to grayscale
     gray_image = skimage.color.rgb2gray(imgfile[..., 0:3])
 
     # blur the image to denoise
     blurred_image = skimage.filters.gaussian(gray_image, sigma=1.0)
-    # plt.imshow(blurred_image)
-    # plt.show()  # show the blurred image
-
-    # show the histogram of the blurred image
-    # histogram, bin_edges = np.histogram(
-    #     blurred_image, bins=256, range=(0.0, 1.0))
-    # fig, ax = plt.subplots()
-    # # plt.plot(bin_edges[0:-1], histogram)
-    # plt.title("Graylevel histogram")
-    # plt.xlabel("gray value")
-    # plt.ylabel("pixel count")
-    # plt.xlim(0, 1.0)
 
     # perform automatic thresholding
     t = skimage.filters.threshold_otsu(blurred_image)
-    # x = skimage.filters.try_all_threshold(blurred_image)
-    # print(x)
-
-    # print("Found automatic threshold t = {}.".format(t))
 
     # create a binary mask with the threshold found by Otsu's method
     binary_mask = blurred_image < t
@@ -69,17 +61,9 @@ def segmentImage(filename):
         # If there are no labeled regions, create a blank mask of the same shape as the input image
         binary_mask = np.zeros_like(blurred_image, dtype='uint8')
 
-    # fig, ax = plt.subplots()
-    # plt.imshow(binary_mask, cmap="gray")  # show the black/white segmentation
-
     # apply the binary mask to select the foreground
     selection = imgfile.copy()
     selection[~binary_mask] = 0
 
-    # fig, ax = plt.subplots()
-    # plt.imshow(selection)
-    # plt.show()  # show the segmented lesion
     return selection
 
-
-segmentImage('data/images/imgs_part_1/PAT_233_354_935.png')

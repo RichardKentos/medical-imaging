@@ -6,6 +6,38 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score, accuracy_score
 
+
+"""
+This script performs various operations on the 'featuresFile.csv' dataset, including data preprocessing, model training, and evaluation.
+
+The script follows the following steps:
+
+1. Reading and Preprocessing Data:
+   - Read the CSV file 'featuresFile.csv' into a pandas DataFrame.
+   - Drop the 'image_id' and 'diagnosis' columns from the DataFrame.
+
+2. Data Visualization:
+   - Plot a count plot of the 'healthy' column in the DataFrame.
+   - Plot a pair plot of the DataFrame with the hue set to 'healthy'.
+
+3. Train-Dev-Test Split:
+   - Split the data into features (X) and target variable (y).
+   - Split the data into train and test sets with a test size of 0.3 and a random state of 42.
+   - Further split the training set into train and dev sets with a test size of 0.25 and a random state of 42.
+
+4. Model Training:
+   - Initialize Logistic Regression and K-Nearest Neighbors classifiers.
+   - Train the models on the training set.
+
+5. Model Evaluation:
+   - Evaluate the models on the training set and print F1 score and accuracy.
+   - Evaluate the models on the dev set and print F1 score and accuracy.
+   - Evaluate the models on the test set and print F1 score and accuracy.
+
+Note: The evaluation metrics used are F1 score and accuracy. The models used are Logistic Regression (lr) and K-Nearest Neighbors (knn).
+"""
+
+
 df = pd.read_csv("featuresFile.csv")
 
 df = df.drop(["image_id", "diagnosis"], axis=1)
@@ -65,7 +97,6 @@ for m_name, clf in models:
 
 # ------------------------------------------- Evaluate on test
 metrics = [("f1", f1_score), ("acc", accuracy_score)]
-# TODO: Add the models you want to evaluate to the list
 models_for_test_eval = models
 
 for m_name, clf in models_for_test_eval:
