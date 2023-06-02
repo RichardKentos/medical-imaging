@@ -31,7 +31,7 @@ def main():
             datareader = csv.reader(csvfile)
             for row in datareader:
                 # because of bad segmentation
-                if (row[-9] == "SCC" or row[-9] == "MEL") and addedcancer < 70:
+                if (row[-9] == "SCC" or row[-9] == "MEL") and addedcancer < 95:
                     for image in os.listdir(folder_dir):
                         if row[-2] == image:
                             image_id = image
